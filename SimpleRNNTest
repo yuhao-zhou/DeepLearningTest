@@ -1,4 +1,3 @@
-import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import SimpleRNN
@@ -11,8 +10,8 @@ train_y = np.asanyarray([[np.mean(data)] for data in train_x])
 
 # build a model
 model = Sequential()
-model.add(SimpleRNN(1, input_shape =(5,1)))
-model.add(Dense(1))
+model.add(SimpleRNN(1, input_shape =(5,1))) # time step of 5, input dimension of 1. Only a single hidden state.
+model.add(Dense(1)) # simple linear transformation.
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 # train the model
