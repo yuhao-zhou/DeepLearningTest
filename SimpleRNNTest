@@ -1,9 +1,6 @@
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.utils import to_categorical
-from keras.layers.convolutional import Conv2D # to add convolutional layers
-from keras.layers import Flatten # to flatten data for fully connected layers
 from keras.layers import SimpleRNN
 import numpy as np
 
