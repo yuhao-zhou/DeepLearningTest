@@ -1,0 +1,34 @@
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.utils import to_categorical
+from keras.layers.convolutional import Conv2D # to add convolutional layers
+from keras.layers import Flatten # to flatten data for fully connected layers
+from keras.layers import SimpleRNN
+import numpy as np
+
+# generate random integer data of dimension 1, time step 5. 10000 data.
+train_x = np.asanyarray([[np.random.randint(0,10,1) for _ in range(5)] for _ in range(10000)])
+# y is basically an average of all x in the 5 time step
+train_y = np.asanyarray([[np.mean(data)] for data in train_x])
+
+# build a model
+model = Sequential()
+model.add(SimpleRNN(1, input_shape =(5,1)))
+model.add(Dense(1))
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# train the model
+model.fit(train_x,train_y, epochs=20)
+# print(model.summary())
+
+# test set generated similarly
+test_x = np.asanyarray([[np.random.randint(0,10,1) for _ in range(5)] for _ in range(3)])
+test_y = np.asanyarray([[np.mean(data)] for data in test_x])
+
+# predict output
+predicted_y = model.predict(test_x)
+
+# IT WORKS!!!
+print(predicted_y)
+print(test_y)
